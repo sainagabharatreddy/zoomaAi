@@ -8,7 +8,7 @@ function App() {
     const [answer, setAnswer] = useState("");
     const [extended, setExtended] = useState(false);
     const [displayedAnswer, setDisplayedAnswer] = useState("");
-    const [ setHistory] = useState([]);
+    const [history, setHistory] = useState([]);
     const [recentChats, setRecentChats] = useState([]);
 
     async function fetchAIContent() {
@@ -17,7 +17,7 @@ function App() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyC1wNs_9kk_vomJ4kTaAOZWP9o18QwCogg',
+                url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBK0NkHbdszHGeM3PiRvgYablcfTQWDF1c',
                 data: {
                     contents: [{
                         parts: [{ text: question }]
@@ -46,7 +46,7 @@ function App() {
                 if (currentIndex === answer.length) {
                     clearInterval(interval);
                 }
-            }, 100);
+            }, 10);
         }
         return () => clearInterval(interval);
     }, [answer]);
@@ -133,8 +133,6 @@ function App() {
                 
                 <div className="ans">Answer: {displayedAnswer}</div>
             </div>
-
-            
         </div>
     );
 }
