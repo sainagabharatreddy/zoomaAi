@@ -1,0 +1,471 @@
+/* Tailwind base and components */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.dots-animation {
+  background: radial-gradient(circle, green 1px, transparent 1px),
+              radial-gradient(circle, green 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+  opacity: 0.1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+
+.text-animation {
+  animation: textFadeIn 2s ease-in-out;
+}
+
+@keyframes textFadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.code-container {
+  font-family: 'Courier New', Courier, monospace;
+  color: green;
+  background-color: black;
+  padding: 1rem;
+  width: 90%;
+  max-width: 600px;
+  margin: 1rem auto;
+  overflow: hidden;
+  display: block;
+}
+
+.code-line {
+  white-space: pre;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.typing {
+  border-right: 2px solid green;
+  white-space: pre;
+  animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: green; }
+}
+
+/* Custom hover effects */
+.nav-link:hover {
+  color: #66ff66; /* Lighter green */
+}
+
+/* Button styles */
+.btn-green {
+  background-color: #66ff66; /* Light green */
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.btn-green:hover {
+  background-color: #4caf50; /* Darker green */
+}
+
+/* Pricing cards */
+.pricing-card {
+  background-color: black;
+  border: 1px solid green;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  color: green;
+  max-width: 300px;
+  margin: 1rem auto;
+  animation: textFadeIn 2s ease-in-out;
+}
+
+.pricing-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: green;
+}
+
+.pricing-card p {
+  font-size: 1rem;
+  color: green;
+}
+
+.pricing-card .btn-green {
+  margin-top: 0.5rem;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #66ff66; /* Light green */
+  color: black;
+  padding: 1rem;
+  text-align: center;
+  animation: textFadeIn 2s ease-in-out;
+}
+
+.footer .nav-link:hover {
+  color: #4caf50; /* Darker green */
+}
+
+
+/* Home.css */
+/* Navbar styles */
+nav {
+  background-color: #000000; /* Black background */
+  color: #00FF00; /* Green text color */
+  height: 100px; /* Increased navbar height */
+  padding: 10px 20px; /* Padding for top and sides */
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav links */
+  align-items: center; /* Center vertically */
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center; /* Center align navigation links */
+  flex: 1; /* Flex to fill remaining space */
+}
+
+.nav-link {
+  margin: 0 20px; /* Spacing between nav links */
+  font-size: 18px; /* Increased font size */
+}
+
+.nav-link:hover {
+  color: #00FFFF; /* Hover color change to lighter green */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  color: #00FF00; /* Green text color for logo */
+  background-color: #000000; /* Black background color */
+  padding: 10px 20px; /* Padding for logo */
+  font-size: 24px; /* Increased font size for logo */
+  margin-right: 10px; /* Margin to separate logo from text */
+}
+
+.zoma-text {
+  font-size: 18px; /* Font size for "Zoma.ai" text */
+}
+/* Home.css */
+/* Navbar styles */
+nav {
+  background-color: #000000; /* Black background */
+  color: #00FF00; /* Green text color */
+  height: 100px; /* Increased navbar height */
+  padding: 10px 20px; /* Padding for top and sides */
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav links */
+  align-items: center; /* Center vertically */
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center; /* Center align navigation links */
+  flex: 1; /* Flex to fill remaining space */
+}
+
+.nav-link {
+  margin: 0 20px; /* Spacing between nav links */
+  font-size: 18px; /* Increased font size */
+}
+
+.nav-link:hover {
+  color: #00FFFF; /* Hover color change to lighter green */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  color: #00FF00; /* Green text color for logo */
+  background-color: #000000; /* Black background color */
+  padding: 10px 20px; /* Padding for logo */
+  font-size: 24px; /* Increased font size for logo */
+  margin-right: 10px; /* Margin to separate logo from text */
+}
+
+.zoma-text {
+  font-size: 18px; /* Font size for "Zoma.ai" text */
+}
+/* Home.css */
+
+.dots-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+              radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  z-index: -1;
+  animation: moveDots 2s linear infinite;
+}
+
+@keyframes moveDots {
+  0% {
+    background-position: 0 0, 10px 10px;
+  }
+  100% {
+    background-position: 20px 0, 30px 10px;
+  }
+}
+/* Home.css */
+
+/* General styles */
+.bg-black {
+  background-color: #000;
+}
+
+.text-green {
+  color: #10b981; /* Green color for text */
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.h-80 {
+  height: 20rem; /* Adjust height as needed */
+}
+
+.min-h-screen {
+  min-height: 100vh; /* Minimum full screen height */
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem; /* Adjust spacing */
+}
+
+.mb-4 {
+  margin-bottom: 1rem; /* Adjust spacing */
+}
+
+.mb-8 {
+  margin-bottom: 2rem; /* Adjust spacing */
+}
+
+.mt-4 {
+  margin-top: 1rem; /* Adjust spacing */
+}
+
+.p-4 {
+  padding: 1rem; /* Adjust padding */
+}
+
+.p-8 {
+  padding: 2rem; /* Adjust padding */
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.my-8 {
+  margin-top: 2rem; /* Adjust margin */
+  margin-bottom: 2rem; /* Adjust margin */
+}
+
+.border-t-2 {
+  border-top-width: 2px;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem; /* Adjust space between links */
+}
+
+/* Navbar styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container .zoma-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #10b981; /* Green color for Zoma.ai text */
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #10b981; /* Green color on hover */
+}
+
+/* Section styles */
+.dots-animation {
+  font-size: 2rem; /* Adjust size of dots */
+  color: #10b981; /* Green color for dots */
+}
+
+.text-3xl {
+  font-size: 1.875rem; /* Adjust font size */
+}
+
+.text-4xl {
+  font-size: 2.25rem; /* Adjust font size */
+}
+
+.text-sm {
+  font-size: 0.875rem; /* Adjust font size */
+}
+
+.text-base {
+  font-size: 1rem; /* Adjust font size */
+}
+
+.btn-green {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #10b981; /* Green button background */
+  color: #fff;
+  font-size: 0.875rem; /* Button font size */
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-green:hover {
+  background-color: #059669; /* Darker green on hover */
+}
+
+
+
+/* Pricing section styles */
+.pricing-card {
+  max-width: 280px; /* Adjust card width */
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.pricing-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-card p {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.pricing-card button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  background-color: #10b981; /* Green button background */
+  color: #fff;
+  font-size: 0.875rem; /* Button font size */
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pricing-card button:hover {
+  background-color: #059669; /* Darker green on hover */
+}
+
+/* Footer styles */
+.footer {
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.footer a {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #10b981; /* Green color on hover */
+}
+
+
