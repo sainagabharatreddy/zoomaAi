@@ -43,7 +43,7 @@ function Ai() {
         setDisplayedAnswer("Loading...");
         try {
             const response = await axios.post(
-                'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyC-IDY5NNGUsf4Ud67neR0m5kfJ_MfcPKI',
+                'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDojqJa_oBa-vefRSmh55RiOc5nQF6aQK0',
                 {
                     contents: [{
                         parts: [{ text: question }]
