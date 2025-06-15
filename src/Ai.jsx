@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './App.css';
 import { assets } from './assets/assets';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function CopyButton({ text }) {
     const copyToClipboard = () => {
@@ -21,7 +21,6 @@ function Ai() {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
     const [displayedAnswer, setDisplayedAnswer] = useState("");
-    const [history, setHistory] = useState([]);
     const [recentChats, setRecentChats] = useState([]);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -29,70 +28,40 @@ function Ai() {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768);
         };
-
         handleResize();
         window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     async function fetchAIContent() {
         setAnswer("Loading...");
         setDisplayedAnswer("Loading...");
         try {
-            const response = await axios.post(
-                'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDojqJa_oBa-vefRSmh55RiOc5nQF6aQK0',
-                {
-                    contents: [{
-                        parts: [{ text: question }]
-                    }],
-                }
-            );
-
-            const generatedAnswer = response.data.candidates[0].content.parts[0].text;
+            const response = await axios.post('http://localhost:5000/api/generate', { prompt: question });
+            const generatedAnswer = response.data.answer;
             setAnswer(generatedAnswer);
             setDisplayedAnswer(generatedAnswer);
-            addToHistory(question, generatedAnswer);
-            addToRecentChats(question);
+            setRecentChats(prev => [question, ...prev]);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error("Error fetching data:", error.response?.data || error.message);
             setAnswer("Error fetching data");
             setDisplayedAnswer("Error fetching data");
         }
     }
 
     useEffect(() => {
-        let currentIndex = 0;
+        let index = 0;
         let interval;
         if (answer && answer !== "Loading...") {
             setDisplayedAnswer("");
             interval = setInterval(() => {
-                setDisplayedAnswer(prev => prev + answer[currentIndex]);
-                currentIndex++;
-                if (currentIndex === answer.length) {
-                    clearInterval(interval);
-                }
+                setDisplayedAnswer(prev => prev + answer[index]);
+                index++;
+                if (index === answer.length) clearInterval(interval);
             }, 10);
         }
         return () => clearInterval(interval);
     }, [answer]);
-
-    const handleNewChat = () => {
-        setQuestion("");
-        setAnswer("");
-        setDisplayedAnswer("");
-    };
-
-    const addToHistory = (question, answer) => {
-        const newHistoryItem = { question, answer };
-        setHistory(prev => [...prev, newHistoryItem]);
-    };
-
-    const addToRecentChats = (question) => {
-        setRecentChats(prev => [question, ...prev]);
-    };
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -101,43 +70,36 @@ function Ai() {
         }
     };
 
+    const handleNewChat = () => {
+        setQuestion("");
+        setAnswer("");
+        setDisplayedAnswer("");
+    };
+
     return (
         <div className="container">
             {!isMobile && (
                 <div className="sidebar">
                     <div className="top">
-                        <div className="new-chat" onClick={handleNewChat}>
-                            <p>New Chat</p>
-                        </div>
+                        <div className="new-chat" onClick={handleNewChat}><p>New Chat</p></div>
                         <div className="recent">
                             <h2>Recent Chats</h2>
                             <ul>
-                                {recentChats.map((chat, index) => (
-                                    <li key={index}>{chat}</li>
-                                ))}
+                                {recentChats.map((chat, index) => <li key={index}>{chat}</li>)}
                             </ul>
                         </div>
                     </div>
                     <div className="bottom">
-                        <div className="bottom-item">
-                            <img src={assets.question_icon} alt="Question Icon" />
-                            <p>Help</p>
-                        </div>
-                        <div className="bottom-item">
-                            <img src={assets.history_icon} alt="History Icon" />
-                            <p>History</p>
-                        </div>
-                        <div className="bottom-item">
-                            <img src={assets.setting_icon} alt="Setting Icon" />
-                            <p>Setting</p>
-                        </div>
+                        <div className="bottom-item"><img src={assets.question_icon} alt="" /><p>Help</p></div>
+                        <div className="bottom-item"><img src={assets.history_icon} alt="" /><p>History</p></div>
+                        <div className="bottom-item"><img src={assets.setting_icon} alt="" /><p>Setting</p></div>
                     </div>
                 </div>
             )}
 
             <div className="main">
                 <div className="nav">
-                    <p><Link to='/ai'>Zoma.Ai</Link></p>
+                    <p><Link to="/ai">Zoma.Ai</Link></p>
                     <img src={assets.user_icon} alt="User Icon" />
                 </div>
                 <div className="main-container">
@@ -154,12 +116,7 @@ function Ai() {
                         </div>
                     )}
 
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            fetchAIContent();
-                        }}
-                    >
+                    <form onSubmit={(e) => { e.preventDefault(); fetchAIContent(); }}>
                         <div className="search-box">
                             <input
                                 type="text"
@@ -168,11 +125,7 @@ function Ai() {
                                 onKeyDown={handleKeyPress}
                                 placeholder="Enter the prompt"
                             />
-                            <img
-                                src={assets.send_icon}
-                                onClick={fetchAIContent}
-                                alt="Send Icon"
-                            />
+                            <img src={assets.send_icon} onClick={fetchAIContent} alt="Send" />
                         </div>
                     </form>
 
